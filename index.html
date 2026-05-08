@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cloudnet 1.2 — Minecraft Store</title>
+  <link rel="stylesheet" href="asset/css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- ===== HEADER / NAVBAR ===== -->
+<header class="navbar" id="navbar">
+  <div class="nav-container">
+
+    <!-- KOLOM KIRI: Brand -->
+    <a href="#" class="nav-brand">
+      <img src="asset/src/img/logo.png" alt="CloudNet Logo" class="nav-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+      <div class="logo-fallback">
+        <span class="logo-icon">⬡</span>
+      </div>
+      <span class="brand-name">CLOUD<span class="brand-accent">NET</span></span>
+    </a>
+
+    <!-- KOLOM TENGAH: Nav links -->
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" class="nav-item active" data-i18n="nav.home">Home</a>
+      <a href="#products" class="nav-item" data-i18n="nav.products">Produk</a>
+      <a href="#about" class="nav-item" data-i18n="nav.about">Tentang</a>
+      <a href="#contact" class="nav-item" data-i18n="nav.contact">Kontak</a>
+    </nav>
+
+    <!-- KOLOM KANAN: Actions + Hamburger (mobile) dalam satu kolom -->
+    <div class="nav-actions">
+      <a href="https://wa.me/62895329556657" target="_blank" class="btn-whatsapp">
+        <i class="fab fa-whatsapp"></i> <span data-i18n="nav.cta">Hubungi Kami</span>
+      </a>
+      <div class="lang-wrapper">
+        <button class="lang-toggle" id="langToggle" onclick="toggleLangDropdown()">
+          <span class="lang-flag" id="langFlag">🇮🇩</span>
+          <span class="lang-label" id="langLabel">ID</span>
+          <span class="lang-chevron">
+            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown">
+          <div class="lang-option active" onclick="setLang('id')">
+            <span class="lang-option-flag">🇮🇩</span>
+            <div class="lang-option-text">
+              <span class="lang-option-name">Indonesia</span>
+              <span class="lang-option-sub">Bahasa Indonesia</span>
+            </div>
+            <span class="lang-option-check">
+              <svg viewBox="0 0 14 14"><path d="M2 7L5.5 10.5L12 3.5"/></svg>
+            </span>
+          </div>
+          <div class="lang-option" onclick="setLang('en')">
+            <span class="lang-option-flag">🇬🇧</span>
+            <div class="lang-option-text">
+              <span class="lang-option-name">English</span>
+              <span class="lang-option-sub">English (UK)</span>
+            </div>
+            <span class="lang-option-check">
+              <svg viewBox="0 0 14 14"><path d="M2 7L5.5 10.5L12 3.5"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- Hamburger di dalam nav-actions agar grid tetap 3 kolom -->
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero" id="home">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-container">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span data-i18n="hero.badge">CloudNet 1.2 Update — Sekarang Tersedia</span>
+    </div>
+    <h1 class="hero-title">
+      <span data-i18n="hero.title1">Solusi Minecraft</span><br/>
+      <span class="hero-title-accent" data-i18n="hero.title2">Profesional</span> <span data-i18n="hero.title3">untuk Anda</span>
+    </h1>
+    <p class="hero-desc" data-i18n="hero.desc">
+      Dari setup server hingga pengembangan plugin — kami menyediakan layanan teknis Minecraft berkualitas tinggi untuk kebutuhan Anda.
+    </p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary" data-i18n="hero.btn1">Lihat Layanan</a>
+      <a href="#contact" class="btn-outline" data-i18n="hero.btn2">Konsultasi Gratis</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">50+</span>
+        <span class="stat-label" data-i18n="hero.stat1">Klien Puas</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">7</span>
+        <span class="stat-label" data-i18n="hero.stat2">Jenis Layanan</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">24/7</span>
+        <span class="stat-label" data-i18n="hero.stat3">Support Aktif</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS SECTION ===== -->
+<section class="products" id="products">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-tag" data-i18n="products.tag">LAYANAN KAMI</span>
+      <h2 class="section-title" data-i18n="products.title">Pilih Layanan Yang Anda Butuhkan</h2>
+      <p class="section-desc" data-i18n="products.desc">Semua layanan dirancang khusus untuk ekosistem Minecraft dengan standar teknis tertinggi.</p>
+    </div>
+
+    <div class="products-grid">
+
+      <div class="product-card" data-product="Server Setup Service">
+        <div class="card-icon-wrap"><i class="fas fa-server card-icon"></i></div>
+        <h3 class="card-title">Server Setup Service</h3>
+        <p class="card-desc" data-i18n="card.setup.desc">Setup server Minecraft dari awal hingga siap digunakan. Konfigurasi optimal, performa stabil, dan keamanan terjamin.</p>
+        <ul class="card-features">
+          <li><i class="fas fa-check"></i> <span data-i18n="card.setup.f1">Konfigurasi penuh</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.setup.f2">Optimasi performa</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.setup.f3">Garansi setup berjalan</span></li>
+        </ul>
+        <button class="card-btn" onclick="openWA('Server Setup Service')">
+          <span data-i18n="card.order">Pesan Sekarang</span> <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+
+      <div class="product-card" data-product="Hire a Developer">
+        <div class="card-icon-wrap"><i class="fas fa-code card-icon"></i></div>
+        <h3 class="card-title">Hire a Developer</h3>
+        <p class="card-desc" data-i18n="card.hire.desc">Rekrut developer Minecraft dedicated untuk tim atau server Anda secara permanen maupun jangka panjang.</p>
+        <ul class="card-features">
+          <li><i class="fas fa-check"></i> <span data-i18n="card.hire.f1">Dedicated full-time</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.hire.f2">Spesialis Java / Bedrock</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.hire.f3">Terverifikasi & terpercaya</span></li>
+        </ul>
+        <button class="card-btn" onclick="openWA('Hire a Developer')">
+          <span data-i18n="card.order">Pesan Sekarang</span> <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+
+      <div class="product-card" data-product="Server Replica">
+        <div class="card-icon-wrap"><i class="fas fa-copy card-icon"></i></div>
+        <h3 class="card-title">Server Replica</h3>
+        <p class="card-desc" data-i18n="card.replica.desc">Duplikasi server Minecraft yang sudah ada — termasuk world, plugin, konfigurasi, dan data pemain secara akurat.</p>
+        <ul class="card-features">
+          <li><i class="fas fa-check"></i> <span data-i18n="card.replica.f1">Kloning akurat 1:1</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.replica.f2">Transfer world & data</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.replica.f3">Tanpa downtime lama</span></li>
+        </ul>
+        <button class="card-btn" onclick="openWA('Server Replica')">
+          <span data-i18n="card.order">Pesan Sekarang</span> <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+
+      <div class="product-card" data-product="Premium Plugins">
+        <div class="card-icon-wrap"><i class="fas fa-puzzle-piece card-icon"></i></div>
+        <h3 class="card-title">Premium Plugins</h3>
+        <p class="card-desc" data-i18n="card.plugins.desc">Koleksi plugin premium Minecraft pilihan dengan fitur lengkap dan kompatibilitas tinggi untuk berbagai versi server.</p>
+        <ul class="card-features">
+          <li><i class="fas fa-check"></i> <span data-i18n="card.plugins.f1">Plugin terupdate</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.plugins.f2">Kompatibel multiversi</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.plugins.f3">Dukungan instalasi</span></li>
+        </ul>
+        <button class="card-btn" onclick="openWA('Premium Plugins')">
+          <span data-i18n="card.order">Pesan Sekarang</span> <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+
+      <div class="product-card" data-product="Script Creation">
+        <div class="card-icon-wrap"><i class="fas fa-terminal card-icon"></i></div>
+        <h3 class="card-title">Script Creation</h3>
+        <p class="card-desc" data-i18n="card.script.desc">Pembuatan script kustom sesuai kebutuhan server Anda — automation, sistem ekonomi, mini-game, dan berbagai fitur unik lainnya.</p>
+        <ul class="card-features">
+          <li><i class="fas fa-check"></i> <span data-i18n="card.script.f1">Kustom sesuai request</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.script.f2">Revisi hingga selesai</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.script.f3">Source code diserahkan</span></li>
+        </ul>
+        <button class="card-btn" onclick="openWA('Script Creation')">
+          <span data-i18n="card.order">Pesan Sekarang</span> <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+
+      <div class="product-card" data-product="Legend Weapons Pack">
+        <div class="card-icon-wrap"><i class="fas fa-khanda card-icon"></i></div>
+        <h3 class="card-title">Legend Weapons <span class="title-bracket">[Pack]</span></h3>
+        <p class="card-desc" data-i18n="card.legend.desc">Paket senjata legendaris dengan model, texture, dan efek custom berkualitas tinggi. Jadikan server Anda tampil berbeda dari yang lain.</p>
+        <ul class="card-features">
+          <li><i class="fas fa-check"></i> <span data-i18n="card.legend.f1">Model 3D custom</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.legend.f2">Texture HD eksklusif</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.legend.f3">Efek partikel unik</span></li>
+          <li><i class="fas fa-check"></i> <span data-i18n="card.legend.f4">Kompatibel semua versi</span></li>
+        </ul>
+        <button class="card-btn" onclick="openWA('Legend Weapons Pack')">
+          <span data-i18n="card.order">Pesan Sekarang</span> <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT SECTION ===== -->
+<section class="about" id="about">
+  <div class="section-container">
+    <div class="about-grid">
+      <div class="about-content">
+        <span class="section-tag" data-i18n="about.tag">TENTANG CLOUDNET</span>
+        <h2 class="section-title" data-i18n="about.title">Mengapa Memilih CloudNet?</h2>
+        <p class="about-text" data-i18n="about.desc">
+          CloudNet hadir sebagai penyedia layanan teknis Minecraft yang mengutamakan kualitas dan kepuasan klien. Dengan pengalaman di dunia pengembangan server Minecraft, kami memahami apa yang dibutuhkan server Anda untuk berkembang.
+        </p>
+        <div class="about-pillars">
+          <div class="pillar">
+            <div class="pillar-icon"><i class="fas fa-shield-alt"></i></div>
+            <div>
+              <h4 data-i18n="about.p1.title">Terpercaya</h4>
+              <p data-i18n="about.p1.desc">Setiap layanan disertai garansi dan transparansi penuh dalam proses pengerjaan.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon"><i class="fas fa-bolt"></i></div>
+            <div>
+              <h4 data-i18n="about.p2.title">Cepat & Efisien</h4>
+              <p data-i18n="about.p2.desc">Pengerjaan tepat waktu dengan komunikasi aktif dari awal hingga akhir.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon"><i class="fas fa-headset"></i></div>
+            <div>
+              <h4 data-i18n="about.p3.title">Support 24/7</h4>
+              <p data-i18n="about.p3.desc">Tim kami siap membantu kapan saja melalui WhatsApp dan platform lainnya.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="update-card">
+          <div class="update-header">
+            <span class="update-dot"></span>
+            <span data-i18n="about.changelog.title">CloudNet v1.2 — Catatan Update</span>
+          </div>
+          <ul class="update-list">
+            <li><i class="fas fa-wrench"></i> <span data-i18n="about.cl3">Peningkatan signifikan kualitas <strong>Script Creation</strong></span></li>
+            <li><i class="fas fa-wrench"></i> <span data-i18n="about.cl4">Alur order lebih cepat dan terstruktur</span></li>
+            <li><i class="fas fa-star"></i> <span data-i18n="about.cl5">Harga lebih kompetitif tanpa mengurangi kualitas</span></li>
+            <li><i class="fas fa-star"></i> <span data-i18n="about.cl6">Response time lebih cepat & responsif</span></li>
+            <li><i class="fas fa-comment-dots"></i> <span data-i18n="about.cl7">Konsultasi lebih personal dan terarah</span></li>
+            <li><i class="fas fa-redo-alt"></i> <span data-i18n="about.cl8">Kebijakan revisi lebih fleksibel</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="contact">
+  <div class="footer-container">
+    <div class="footer-grid">
+
+      <div class="footer-brand-col">
+        <div class="footer-brand">
+          <img src="asset/src/img/logo.png" alt="CloudNet" class="footer-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+          <div class="logo-fallback footer-logo-fallback">
+            <span class="logo-icon">⬡</span>
+          </div>
+          <span class="footer-brand-name">CLOUD<span class="brand-accent">NET</span></span>
+        </div>
+        <p class="footer-tagline" data-i18n="footer.tagline">Layanan teknis Minecraft profesional dengan standar kualitas tertinggi.</p>
+        <div class="footer-socials">
+          <a href="https://wa.me/62895329556657" class="social-btn" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="social-btn" title="Discord"><i class="fab fa-discord"></i></a>
+          <a href="#" class="social-btn" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-col-title" data-i18n="footer.col1.title">Layanan</h4>
+        <ul class="footer-links">
+          <li><a href="javascript:void(0)" onclick="openWA('Server Setup Service')">Server Setup Service</a></li>
+          <li><a href="javascript:void(0)" onclick="openWA('Hire a Developer')">Hire a Developer</a></li>
+          <li><a href="javascript:void(0)" onclick="openWA('Server Replica')">Server Replica</a></li>
+          <li><a href="javascript:void(0)" onclick="openWA('Premium Plugins')">Premium Plugins</a></li>
+          <li><a href="javascript:void(0)" onclick="openWA('Script Creation')">Script Creation</a></li>
+          <li><a href="javascript:void(0)" onclick="openWA('Legend Weapons Pack')">Legend Weapons [Pack]</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-col-title" data-i18n="footer.col2.title">Informasi</h4>
+        <ul class="footer-links">
+          <li><a href="#home" data-i18n="footer.col2.l1">Beranda</a></li>
+          <li><a href="#about" data-i18n="footer.col2.l2">Tentang Kami</a></li>
+          <li><a href="#products" data-i18n="footer.col2.l3">Semua Layanan</a></li>
+          <li><a href="https://wa.me/62895329556657" data-i18n="footer.col2.l4" target="_blank">Hubungi Kami</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-col-title" data-i18n="footer.col3.title">Informasi Kontak</h4>
+        <ul class="footer-contact-list">
+          <li><i class="fab fa-whatsapp"></i><span>+62 895-3295-56657</span></li>
+          <li><i class="fab fa-discord"></i><span>CloudNet Store</span></li>
+          <li><i class="fas fa-clock"></i><span data-i18n="footer.active">Aktif 24/7 via WhatsApp</span></li>
+          <li><i class="fas fa-gamepad"></i><span data-i18n="footer.specialist">Spesialis Minecraft Server</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span data-i18n="footer.copy">© 2025 CloudNet. Seluruh hak dilindungi.</span>
+      <span class="footer-bottom-right" data-i18n="footer.sub">Minecraft Store & Development Services</span>
+    </div>
+  </div>
+
+  <a href="https://wa.me/62895329556657" class="float-wa" target="_blank" title="Chat WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</footer>
+
+<script src="asset/js/script.js"></script>
+</body>
+</html>
