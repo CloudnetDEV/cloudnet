@@ -34,15 +34,10 @@ const translations = {
     'card.hire.f1': 'Dedicated full-time',
     'card.hire.f2': 'Spesialis Java / Bedrock',
     'card.hire.f3': 'Terverifikasi & terpercaya',
-    'card.replica.desc': 'Duplikasi server Minecraft yang sudah ada — tidak termasuk world dan data player.',
-    'card.replica.f1': 'Kloning akurat 11:12',
-    'card.replica.f2': 'Full configurasi',
+    'card.replica.desc': 'Duplikasi server Minecraft yang sudah ada — termasuk world, plugin, konfigurasi, dan data pemain secara akurat.',
+    'card.replica.f1': 'Kloning akurat 1:1',
+    'card.replica.f2': 'Transfer world & data',
     'card.replica.f3': 'Tanpa downtime lama',
-    'card.pluginreplica.desc': 'Duplikasi konfigurasi plugin dari server lain secara akurat — tanpa perlu menyentuh world atau data pemain.',
-    'card.pluginreplica.f1': 'Kloning plugin & config',
-    'card.pluginreplica.f2': 'Tanpa transfer world/data',
-    'card.pluginreplica.f3': 'Kompatibel semua versi',
-    'card.tag.hot': 'HOT',
     'card.plugins.desc': 'Koleksi plugin premium Minecraft pilihan dengan fitur lengkap dan kompatibilitas tinggi untuk berbagai versi server.',
     'card.plugins.f1': 'Plugin terupdate',
     'card.plugins.f2': 'Kompatibel multiversi',
@@ -51,7 +46,6 @@ const translations = {
     'card.script.f1': 'Kustom sesuai request',
     'card.script.f2': 'Revisi hingga selesai',
     'card.script.f3': 'Source code diserahkan',
-    'card.tag.exclusive': 'EKSKLUSIF',
     'card.legend.desc': 'Paket senjata legendaris dengan model, texture, dan efek custom berkualitas tinggi. Jadikan server Anda tampil berbeda dari yang lain.',
     'card.legend.f1': 'Model 3D custom',
     'card.legend.f2': 'Texture HD eksklusif',
@@ -119,11 +113,6 @@ const translations = {
     'card.replica.f1': 'Accurate 1:1 cloning',
     'card.replica.f2': 'World & data transfer',
     'card.replica.f3': 'Minimal downtime',
-    'card.pluginreplica.desc': 'Accurately duplicate plugin configurations from another server — without touching the world or player data.',
-    'card.pluginreplica.f1': 'Plugin & config cloning',
-    'card.pluginreplica.f2': 'No world/data transfer',
-    'card.pluginreplica.f3': 'All versions compatible',
-    'card.tag.hot': 'HOT',
     'card.plugins.desc': 'A curated collection of premium Minecraft plugins with complete features and high compatibility for various server versions.',
     'card.plugins.f1': 'Up-to-date plugins',
     'card.plugins.f2': 'Multi-version compatible',
@@ -132,7 +121,6 @@ const translations = {
     'card.script.f1': 'Custom per request',
     'card.script.f2': 'Revisions until done',
     'card.script.f3': 'Source code delivered',
-    'card.tag.exclusive': 'EXCLUSIVE',
     'card.legend.desc': 'Legendary weapon pack with high-quality custom models, textures, and effects. Make your server stand out from the rest.',
     'card.legend.f1': 'Custom 3D models',
     'card.legend.f2': 'Exclusive HD textures',
@@ -197,59 +185,7 @@ function updateLangButton(lang) {
   if (labelEl) labelEl.textContent = cfg.label;
 }
 
-// ===== BUILD DROPDOWN =====
-function buildLangDropdown() {
-  const btn = document.getElementById('langToggle');
-  if (!btn) return;
-
-  btn.removeAttribute('onclick');
-
-  const wrapper = document.createElement('div');
-  wrapper.className = 'lang-wrapper';
-  btn.parentNode.insertBefore(wrapper, btn);
-  wrapper.appendChild(btn);
-
-  const chevron = document.createElement('span');
-  chevron.className = 'lang-chevron';
-  chevron.innerHTML = `<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"
-    stroke-linecap="round" stroke-linejoin="round"><polyline points="2,4 6,8 10,4"/></svg>`;
-  btn.appendChild(chevron);
-
-  const dropdown = document.createElement('div');
-  dropdown.className = 'lang-dropdown';
-  dropdown.id = 'langDropdown';
-
-  Object.entries(langConfig).forEach(([code, cfg]) => {
-    const opt = document.createElement('div');
-    opt.className = `lang-option${code === currentLang ? ' active' : ''}`;
-    opt.dataset.lang = code;
-    opt.innerHTML = `
-      <span class="lang-option-flag">${cfg.flag}</span>
-      <span class="lang-option-text">
-        <span class="lang-option-name">${cfg.name}</span>
-        <span class="lang-option-sub">${cfg.sub}</span>
-      </span>
-      <span class="lang-option-check">
-        <svg viewBox="0 0 14 14" fill="none" stroke="#4ade80" stroke-width="2.5"
-          stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="2,7 5.5,10.5 12,3"/>
-        </svg>
-      </span>`;
-    opt.addEventListener('click', () => selectLang(code));
-    dropdown.appendChild(opt);
-  });
-
-  wrapper.appendChild(dropdown);
-
-  btn.addEventListener('click', e => {
-    e.stopPropagation();
-    dropdown.classList.contains('visible') ? closeDropdown() : openDropdown();
-  });
-
-  document.addEventListener('click', closeDropdown);
-  dropdown.addEventListener('click', e => e.stopPropagation());
-}
-
+// ===== DROPDOWN CONTROLS =====
 function openDropdown() {
   document.getElementById('langToggle')?.classList.add('open');
   document.getElementById('langDropdown')?.classList.add('visible');
@@ -260,6 +196,18 @@ function closeDropdown() {
   document.getElementById('langDropdown')?.classList.remove('visible');
 }
 
+// Toggle dropdown — called from HTML onclick
+function toggleLangDropdown() {
+  const dropdown = document.getElementById('langDropdown');
+  if (!dropdown) return;
+  if (dropdown.classList.contains('visible')) {
+    closeDropdown();
+  } else {
+    openDropdown();
+  }
+}
+
+// Select a language
 function selectLang(lang) {
   if (lang === currentLang) { closeDropdown(); return; }
   currentLang = lang;
@@ -270,6 +218,11 @@ function selectLang(lang) {
     opt.classList.toggle('active', opt.dataset.lang === lang);
   });
   closeDropdown();
+}
+
+// Alias for HTML onclick compatibility (setLang called from HTML)
+function setLang(lang) {
+  selectLang(lang);
 }
 
 function toggleLang() {
@@ -284,58 +237,106 @@ function openWA(product) {
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// ===== NAVBAR SCROLL =====
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
-});
-
-// ===== HAMBURGER =====
-const hamburger = document.getElementById('hamburger');
-const navLinks  = document.getElementById('navLinks');
-hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
-navLinks.querySelectorAll('.nav-item').forEach(link => {
-  link.addEventListener('click', () => navLinks.classList.remove('open'));
-});
-
-// ===== ACTIVE NAV ON SCROLL =====
-const sections = document.querySelectorAll('section[id], footer[id]');
-const navItems  = document.querySelectorAll('.nav-item');
-const sectionObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navItems.forEach(i => i.classList.remove('active'));
-      document.querySelector(`.nav-item[href="#${entry.target.id}"]`)?.classList.add('active');
-    }
-  });
-}, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-sections.forEach(s => sectionObserver.observe(s));
-
-// ===== FADE IN =====
-const fadeEls = document.querySelectorAll('.product-card, .pillar, .update-card, .hero-badge, .stat-item');
-fadeEls.forEach(el => el.classList.add('fade-in'));
-const fadeObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const idx = Array.from(fadeEls).indexOf(entry.target);
-      setTimeout(() => entry.target.classList.add('visible'), 60 * (idx % 6));
-      fadeObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
-fadeEls.forEach(el => fadeObserver.observe(el));
-
-// ===== SMOOTH SCROLL =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
-  });
-});
-
-// ===== INIT =====
+// ===== INIT — All DOM operations inside DOMContentLoaded =====
 document.addEventListener('DOMContentLoaded', () => {
-  buildLangDropdown();
+  // -- Apply language --
   applyTranslations(currentLang);
   updateLangButton(currentLang);
+
+  // -- Mark active language in dropdown --
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    const lang = opt.getAttribute('onclick')?.match(/setLang\('(\w+)'\)/)?.[1];
+    if (lang) {
+      opt.dataset.lang = lang;
+      opt.classList.toggle('active', lang === currentLang);
+    }
+  });
+
+  // -- Lang toggle click (stop propagation) --
+  const langToggle = document.getElementById('langToggle');
+  if (langToggle) {
+    langToggle.addEventListener('click', e => {
+      e.stopPropagation();
+    });
+  }
+
+  // -- Close dropdown when clicking outside --
+  document.addEventListener('click', e => {
+    const wrapper = document.querySelector('.lang-wrapper');
+    if (wrapper && !wrapper.contains(e.target)) {
+      closeDropdown();
+    }
+  });
+
+  // -- Prevent dropdown click from closing --
+  const langDropdown = document.getElementById('langDropdown');
+  if (langDropdown) {
+    langDropdown.addEventListener('click', e => e.stopPropagation());
+  }
+
+  // -- NAVBAR SCROLL --
+  const navbar = document.getElementById('navbar');
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+  }
+
+  // -- HAMBURGER --
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', e => {
+      e.stopPropagation();
+      navLinks.classList.toggle('open');
+    });
+
+    // Close menu when clicking a nav item
+    navLinks.querySelectorAll('.nav-item').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Close menu when clicking outside (Bug 7 fix)
+    document.addEventListener('click', e => {
+      if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+        navLinks.classList.remove('open');
+      }
+    });
+  }
+
+  // -- ACTIVE NAV ON SCROLL --
+  const sections = document.querySelectorAll('section[id], footer[id]');
+  const navItems  = document.querySelectorAll('.nav-item');
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navItems.forEach(i => i.classList.remove('active'));
+        document.querySelector(`.nav-item[href="#${entry.target.id}"]`)?.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  sections.forEach(s => sectionObserver.observe(s));
+
+  // -- FADE IN --
+  const fadeEls = document.querySelectorAll('.product-card, .pillar, .update-card, .hero-badge, .stat-item');
+  fadeEls.forEach(el => el.classList.add('fade-in'));
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = Array.from(fadeEls).indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), 60 * (idx % 6));
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => fadeObserver.observe(el));
+
+  // -- SMOOTH SCROLL --
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
 });
